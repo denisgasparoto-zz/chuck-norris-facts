@@ -29,6 +29,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".presentation.facts.FactsActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="fullSensor" />
+
     </application>
 
 </manifest>

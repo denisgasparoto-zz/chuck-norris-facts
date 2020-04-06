@@ -1,5 +1,8 @@
 package com.denisgasparoto.chucknorrisfacts.core.di
 
+import com.denisgasparoto.chucknorrisfacts.presentation.facts.FactsActivity
+import com.denisgasparoto.chucknorrisfacts.presentation.facts.FactsRouter
+import com.denisgasparoto.chucknorrisfacts.presentation.facts.FactsViewModel
 import com.denisgasparoto.chucknorrisfacts.presentation.splash.SplashActivity
 import com.denisgasparoto.chucknorrisfacts.presentation.splash.SplashRouter
 import com.denisgasparoto.chucknorrisfacts.presentation.splash.SplashViewModel
@@ -15,6 +18,12 @@ internal val viewModelsModule = module {
             SplashRouter(activity),
             get(),
             get()
+        )
+    }
+
+    viewModel { (activity: FactsActivity) ->
+        FactsViewModel(
+            FactsRouter(activity)
         )
     }
 }
