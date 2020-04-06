@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/spacing_medium"
+    android:layout_marginEnd="@dimen/spacing_medium"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/empty_list_iv_image"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        tools:background="@drawable/ic_app_logo" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/empty_list_tv_title"
+        style="@style/Regular.H5.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/spacing_huge"
+        android:textAlignment="center"
+        tools:text="Can\'t load search results" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/empty_list_tv_message"
+        style="@style/Regular.H5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:textAlignment="center"
+        tools:text="Something went wrong.\nTry searching again." />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

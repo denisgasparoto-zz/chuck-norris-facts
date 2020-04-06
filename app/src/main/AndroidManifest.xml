@@ -34,6 +34,11 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="fullSensor" />
 
+        <activity
+            android:name=".presentation.factsbyquery.FactsByQueryActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="fullSensor" />
+
     </application>
 
 </manifest>

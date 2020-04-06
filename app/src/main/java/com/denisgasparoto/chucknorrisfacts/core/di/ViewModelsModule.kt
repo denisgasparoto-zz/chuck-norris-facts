@@ -3,6 +3,10 @@ package com.denisgasparoto.chucknorrisfacts.core.di
 import com.denisgasparoto.chucknorrisfacts.presentation.facts.FactsActivity
 import com.denisgasparoto.chucknorrisfacts.presentation.facts.FactsRouter
 import com.denisgasparoto.chucknorrisfacts.presentation.facts.FactsViewModel
+import com.denisgasparoto.chucknorrisfacts.presentation.factsbyquery.FactsByQueryActivity
+import com.denisgasparoto.chucknorrisfacts.presentation.factsbyquery.FactsByQueryInteractor
+import com.denisgasparoto.chucknorrisfacts.presentation.factsbyquery.FactsByQueryRouter
+import com.denisgasparoto.chucknorrisfacts.presentation.factsbyquery.FactsByQueryViewModel
 import com.denisgasparoto.chucknorrisfacts.presentation.splash.SplashActivity
 import com.denisgasparoto.chucknorrisfacts.presentation.splash.SplashRouter
 import com.denisgasparoto.chucknorrisfacts.presentation.splash.SplashViewModel
@@ -24,6 +28,15 @@ internal val viewModelsModule = module {
     viewModel { (activity: FactsActivity) ->
         FactsViewModel(
             FactsRouter(activity)
+        )
+    }
+
+    viewModel { (activity: FactsByQueryActivity) ->
+        FactsByQueryViewModel(
+            FactsByQueryRouter(activity),
+            FactsByQueryInteractor(get(), get()),
+            get(),
+            get()
         )
     }
 }
