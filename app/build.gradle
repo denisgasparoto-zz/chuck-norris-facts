@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -18,96 +17,21 @@ android {
     }
 
     buildTypes {
-        def apiUrlResName = "base_url"
-        def apiUrl = "https://api.chucknorris.io/jokes/"
-
         release {
-            resValue("string", apiUrlResName, apiUrl)
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-
-        debug {
-            resValue("string", apiUrlResName, apiUrl)
-        }
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    testOptions {
-        unitTests {
-            returnDefaultValues = true
-            includeAndroidResources = true
-        }
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    // Androidx
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.cardview:cardview:1.0.0'
-
-    // Material
-    implementation 'com.google.android.material:material:1.1.0'
-
-    // Lifecycle
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-
-    // Retrofit 2
-    implementation 'com.squareup.retrofit2:retrofit:2.7.0'
-    implementation 'com.squareup.retrofit2:converter-moshi:2.7.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
-
-    // Moshi
-    implementation 'com.squareup.moshi:moshi-kotlin:1.9.2'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
-    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
-
-    // RxJava
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.18'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-
-    // RxBinding
-    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0'
-    implementation 'com.jakewharton.rxbinding3:rxbinding-core:3.0.0'
-    implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.2.0'
-
-    // Koin
-    implementation 'org.koin:koin-android:2.0.1'
-    implementation 'org.koin:koin-androidx-scope:2.0.1'
-    implementation 'org.koin:koin-androidx-viewmodel:2.0.1'
-
-    // Timber
-    implementation 'com.jakewharton.timber:timber:4.7.1'
-
-    // Mockk
-    testImplementation 'io.mockk:mockk:1.9.3'
-
-    // Junit
     testImplementation 'junit:junit:4.12'
-    testImplementation 'android.arch.core:core-testing:1.1.1'
-    androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-
-    // Espresso
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    // Kakao
-    androidTestImplementation 'com.agoda.kakao:kakao:1.4.0'
 }
