@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Spacing Defaults -->
+    <dimen name="spacing_empty">0dp</dimen>
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_normal">12dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_huge">32dp</dimen>
+    <!-- Spacing Defaults -->
+
+    <!-- Text Defaults -->
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_normal">16sp</dimen>
+    <dimen name="text_medium">20sp</dimen>
+    <dimen name="text_large">24sp</dimen>
+    <dimen name="text_huge">32sp</dimen>
+    <!-- Text Defaults -->
+
+    <!-- Facts Activity -->
+    <dimen name="activity_facts_iv_logo_layout_height">250dp</dimen>
+    <!-- Facts Activity -->
+
+    <!-- Facts By Query Activity -->
+    <dimen name="activity_facts_by_query_pb_loading_margin_top">-7dp</dimen>
+    <!-- Facts By Query Activity -->
+
+</resources>
