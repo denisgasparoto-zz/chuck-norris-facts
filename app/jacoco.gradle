@@ -14,7 +14,10 @@ tasks.withType(Test) {
     jacoco.excludes = ['jdk.internal.*']
 }
 
-task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+task jacocoTestReport(type: JacocoReport, dependsOn: [
+        'testDebugUnitTest',
+        'createDebugCoverageReport'
+]) {
     def coverageSourceDirs = [
             "src/main/java"
     ]
