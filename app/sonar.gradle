@@ -6,7 +6,6 @@ sonarqube {
         property 'sonar.organization', 'denisgasparoto'
         property("sonar.projectKey", projectPackage)
         property("sonar.projectName", projectName)
-        property("sonar.projectVersion", "$versionName [$versionCode]")
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.language", "kotlin")
         property("sonar.coverage.jacoco.xmlReportPaths", "$rootDir/app/build/reports/jacocoTestReport/jacocoTestReport.xml")
