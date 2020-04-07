@@ -11,7 +11,7 @@ on:
 
 jobs:
   code-analysis:
-    name: Runs Detekt for static code analysis
+    name: Runs Detekt
     runs-on: ubuntu-18.04
 
     steps:
