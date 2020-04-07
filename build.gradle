@@ -21,7 +21,7 @@ sonarqube {
         property 'sonar.organization', 'denisgasparoto'
         property 'sonar.projectKey', 'chuck-norris-facts-sonar-cloud'
         property 'sonar.host.url', 'https://sonarcloud.io'
-        property 'sonar.login', '17f1d5c6d90df36dce5e0ffd69ca3e57bc2d4c4f'
+        property 'sonar.login', '68454070dd0a022dfefb2b0a2b4da331fe758e4b'
         property 'sonar.jacoco.reportPaths', 'build/jacoco/testDebugUnitTest.exec'
         property 'sonar.coverage.exclusions', "**/model/**"
     }
