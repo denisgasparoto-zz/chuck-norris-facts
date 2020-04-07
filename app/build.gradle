@@ -26,6 +26,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
     buildTypes {
         def apiUrlResName = "base_url"
         def apiUrl = "https://api.chucknorris.io/jokes/"
@@ -48,20 +54,16 @@ android {
 
     testOptions {
         unitTests.returnDefaultValues = true
+
+        unitTests {
+            includeAndroidResources = true
+        }
     }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-//    detekt {
-//        buildUponDefaultConfig = true
-//
-//        reports {
-//            html.enabled = true
-//            xml.enabled = true
-//        }
-//    }
 }
 
 dependencies {
