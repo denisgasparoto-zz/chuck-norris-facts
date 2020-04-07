@@ -23,7 +23,7 @@ jobs:
         run: bash ./gradlew detekt
 
   unit-tests:
-    name: Runs Unit tests
+    name: Runs Unit Tests
     runs-on: ubuntu-18.04
 
     steps:
@@ -36,13 +36,13 @@ jobs:
         run: bash ./gradlew test --stacktrace
 
   sonar-scan:
-    name: Runs SonarCloud scan
+    name: Runs SonarCloud Scan
     runs-on: ubuntu-18.04
 
     steps:
       - uses: actions/checkout@v1
       - name: SonarCloud Scan
-        run: bash ./gradlew testDebugUnitTest sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }} --stacktrace
+        run: bash ./gradlew testQaDebugUnitTest sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }} --stacktrace
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Link to SonarCloud Report
