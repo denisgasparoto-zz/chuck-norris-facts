@@ -15,9 +15,6 @@ tasks.withType(Test) {
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
-    group = "Reporting"
-    description = "Generate Jacoco coverage reports for Debug build"
-
     reports {
         xml.enabled = true
         html.enabled = true
