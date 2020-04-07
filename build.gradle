@@ -5,7 +5,7 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.2'
@@ -16,11 +16,25 @@ buildscript {
     }
 }
 
+plugins {
+    id "org.sonarqube" version "2.7.1"
+}
+
+sonarqube {
+    properties {
+        property 'sonar.organization', 'denisgasparoto'
+        property 'sonar.projectKey', 'denisgasparoto_chuck-norris-facts'
+        property 'sonar.host.url', 'https://sonarcloud.io'
+        property 'sonar.jacoco.reportPaths', 'build/jacoco/testDebugUnitTest.exec'
+        property 'sonar.coverage.exclusions', "**/model/**"
+    }
+}
+
 allprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
 }
 
