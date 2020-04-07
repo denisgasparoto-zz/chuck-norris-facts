@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: SonarCloud Scan
-        run: bash ./gradlew testQaDebugUnitTest sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }} --stacktrace
+        run: bash ./gradlew testDebug sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }} --stacktrace
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Link to SonarCloud Report

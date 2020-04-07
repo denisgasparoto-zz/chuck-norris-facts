@@ -24,7 +24,7 @@ sonarqube {
         property 'sonar.organization', 'denisgasparoto'
         property 'sonar.projectKey', 'com.denisgasparoto.chucknorrisfacts'
         property 'sonar.host.url', 'https://sonarcloud.io'
-        property 'sonar.jacoco.reportPaths', 'build/jacoco/testDebugUnitTest.exec'
+        property 'sonar.jacoco.reportPaths', 'build/jacoco/testDebug.exec'
     }
 }
 
