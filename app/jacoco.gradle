@@ -1,0 +1,78 @@
+apply(plugin: "jacoco")
+
+ext {
+    coverageSourceDirs = 'src/test/java'
+}
+
+jacoco {
+    toolVersion = "0.8.5"
+    reportsDir = file("$buildDir/reports")
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: "testQaDebugUnitTest") {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports for Debug build"
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def projectPath = projectPackage.replace(".", "/")
+
+    def debugTree = fileTree(
+            dir: "$buildDir/intermediates/javac/qaDebug/classes/$projectPath/jacocotest",
+            excludes: testCoverageExclusions
+    )
+    def kotlinDebugTree = fileTree(
+            dir: "$buildDir/tmp/kotlin-classes/qaDebug",
+            excludes: testCoverageExclusions
+    )
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    classDirectories.setFrom(files([debugTree], [kotlinDebugTree]))
+    executionData.setFrom(files("$buildDir/jacoco/testQaDebugUnitTest.exec"))
+    sourceDirectories.setFrom(files([mainSrc]))
+}
+
+//tasks.matching { it instanceof Test }.all {
+//    testLogging.events = ["failed", "passed", "skipped"]
+//}
+//
+//task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+//
+//    def coverageSourceDirs = [
+//            "src/main/java"
+//    ]
+//
+//    def excludes = [
+//            'android/**/*.*',
+//            '**/R.class',
+//            '**/R$*.class',
+//            '**/model/**',
+//            '**/shared/**',
+//            '**/*Adapter*.*',
+//            '**/*ViewHolder*.*',
+//            '**/*Module*.*',
+//            '**/*Interactor*.*',
+//            '**/*Activity*.*',
+//            '**/*Test*.*',
+//    ]
+//
+//    def javaClasses = fileTree(
+//            dir: "$buildDir/intermediates/classes/debug",
+//            excludes: excludes
+//    )
+//
+//    classDirectories.setFrom(files([javaClasses]))
+//    additionalSourceDirs.setFrom(files(coverageSourceDirs))
+//    sourceDirectories.setFrom(files(coverageSourceDirs))
+//    executionData.setFrom(fileTree(dir: "$buildDir", includes: [
+//            "jacoco/testDebugUnitTest.exec"
+//    ]))
+//
+//    reports {
+//        xml.enabled = true
+//        html.enabled = true
+//    }
+//}

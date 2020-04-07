@@ -1,0 +1,34 @@
+sonarqube {
+    def sonarCoverageExclusions = testCoverageExclusions.join(",")
+    def sonarFileExclusions = fileExclusions.join(",")
+
+    properties {
+        property 'sonar.organization', 'denisgasparoto'
+        property("sonar.projectKey", projectPackage)
+        property("sonar.projectName", projectName)
+        property("sonar.projectVersion", "$versionName [$versionCode]")
+        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.language", "kotlin")
+        property("sonar.coverage.jacoco.xmlReportPaths", "$rootDir/app/build/reports/jacocoTestReport/jacocoTestReport.xml")
+
+        property("sonar.exclusions", sonarFileExclusions)
+
+        property("sonar.coverage.exclusions", sonarCoverageExclusions)
+
+        property("sonar.kotlin.detekt.reportPaths", "$rootDir/app/build/reports/detekt/detekt.xml")
+
+        property("sonar.username", System.getenv("SONAR_TOKEN"))
+        property("sonar.login", "261f25696bd59e89c34dd4c867a8fcb94dfc27c9")
+    }
+
+    //sonarqube {
+    //    properties {
+    //        property 'sonar.organization', 'denisgasparoto'
+    //        property 'sonar.projectKey', 'denisgasparoto_chuck-norris-facts'
+    //        property 'sonar.host.url', 'https://sonarcloud.io'
+    //        property 'sonar.login', '261f25696bd59e89c34dd4c867a8fcb94dfc27c9'
+    //        property 'sonar.jacoco.reportPaths', 'build/jacoco/testDebugUnitTest.exec'
+    //        property 'sonar.coverage.exclusions', "**/model/**"
+    //    }
+    //}
+}
