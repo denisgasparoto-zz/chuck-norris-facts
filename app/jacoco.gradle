@@ -15,16 +15,38 @@ tasks.withType(Test) {
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+    def coverageSourceDirs = [
+            "src/main/java"
+    ]
+
+    def fileFilter = [
+            '**/R.class',
+            '**/R$*.class',
+            '**/*$ViewInjector*.*',
+            '**/*$ViewBinder*.*',
+            '**/BuildConfig.*',
+            '**/Manifest*.*'
+    ]
+
+    def javaClasses = fileTree(
+            dir: "$buildDir/intermediates/classes/debug",
+            excludes: fileFilter
+    )
+
     reports {
         xml.enabled = true
         html.enabled = true
     }
 
-    def debugTree = fileTree(dir: "$project.buildDir/tmp/kotlin-classes/debug", excludes: testCoverageExclusions)
-    def kotlinDebugTree = fileTree(dir: "$buildDir/tmp/kotlin-classes/qaDebug", excludes: testCoverageExclusions)
-    def mainSrc = "$project.projectDir/src/main/kotlin"
+    classDirectories.setFrom(files([javaClasses]))
+    additionalSourceDirs.setFrom(files(coverageSourceDirs))
+    sourceDirectories.setFrom(files(coverageSourceDirs))
+    executionData.setFrom(fileTree(dir: "$buildDir", includes: [
+            "jacoco/testDebugUnitTest.exec"
+    ]))
 
-    sourceDirectories.setFrom(files([mainSrc]))
-    classDirectories.setFrom(files([debugTree], [kotlinDebugTree]))
-    executionData.setFrom(files("$buildDir/jacoco/testDebugUnitTest.exec"))
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
 }
