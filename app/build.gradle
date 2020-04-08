@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'jacoco'
 
 android {
     compileSdkVersion 29
@@ -13,22 +14,26 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testOptions {
+            unitTests.returnDefaultValues = true
+        }
+        multiDexEnabled true
     }
 
     buildTypes {
         def apiUrlResName = "base_url"
         def apiUrl = "https://api.chucknorris.io/jokes/"
 
+        debug {
+            testCoverageEnabled = true
+            resValue("string", apiUrlResName, apiUrl)
+        }
+
         release {
             resValue("string", apiUrlResName, apiUrl)
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-
-        debug {
-            resValue("string", apiUrlResName, apiUrl)
         }
     }
 
@@ -39,13 +44,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    testOptions {
-        unitTests {
-            returnDefaultValues = true
-            includeAndroidResources = true
-        }
     }
 }
 
@@ -111,3 +109,41 @@ dependencies {
     // Kakao
     androidTestImplementation 'com.agoda.kakao:kakao:1.4.0'
 }
+
+tasks.matching { it instanceof Test }.all {
+    testLogging.events = ["failed", "passed", "skipped"]
+}
+
+task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+
+    def coverageSourceDirs = [
+            "src/main/java"
+    ]
+
+    def fileFilter = [
+            '**/R.class',
+            '**/R$*.class',
+            '**/*$ViewInjector*.*',
+            '**/*$ViewBinder*.*',
+            '**/BuildConfig.*',
+            '**/Manifest*.*'
+    ]
+
+    def javaClasses = fileTree(
+            dir: "$buildDir/intermediates/classes/debug",
+            excludes: fileFilter
+    )
+
+    classDirectories.setFrom(files([javaClasses]))
+    additionalSourceDirs.setFrom(files(coverageSourceDirs))
+    sourceDirectories.setFrom(files(coverageSourceDirs))
+    executionData.setFrom(fileTree(dir: "$buildDir", includes: [
+            "jacoco/testDebugUnitTest.exec"
+    ]))
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
