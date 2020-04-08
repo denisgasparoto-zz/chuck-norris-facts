@@ -32,15 +32,41 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Run Unit tests
+      - name: Running Unit Tests
         run: bash ./gradlew test --stacktrace
 
   codacy-analysis-cli:
     runs-on: ubuntu-latest
-    name: codacy-analysis-cli
+    name: Runs Codacy Analysys
     steps:
       - uses: actions/checkout@master
-      - name: Run codacy-analysis-cli
+      - name: Running Codacy Analysys
         uses: mrfyda/codacy-analysis-cli-action@master
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+
+  codacy-coverage-reporter:
+    runs-on: ubuntu-latest
+    name: Runs Codacy Coverage Reporter
+    steps:
+      - uses: actions/checkout@master
+      - name: Running Codacy Coverage Reporter
+        uses: mrfyda/codacy-coverage-reporter-action@master
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+
+#  sonar-scan:
+#    name: Runs SonarCloud Scan
+#    runs-on: ubuntu-18.04
+#
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: SonarCloud Scan
+#        uses: sonarsource/sonarcloud-github-action@master
+#        #        run: bash ./gradlew testDebug sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }} --stacktrace
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#      - name: Link to SonarCloud Report
+#        run: echo "https://sonarcloud.io/dashboard?id=chuck-norris-facts-sonar-cloud"
+
