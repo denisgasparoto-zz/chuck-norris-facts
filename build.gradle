@@ -15,31 +15,9 @@ buildscript {
 }
 
 plugins {
-    id "org.sonarqube" version "2.8"
     id "io.gitlab.arturbosch.detekt" version "1.7.4"
 }
 
-//sonarqube {
-//    properties {
-//        property 'sonar.organization', 'denisgasparoto'
-//        property 'sonar.projectName', 'chuck-norris-facts'
-//        property 'sonar.projectKey', 'com.denisgasparoto.chucknorrisfacts'
-//        property 'sonar.username', System.getenv("SONAR_TOKEN")
-//        property 'sonar.host.url', 'https://sonarcloud.io'
-//        property 'sonar.language', 'kotlin'
-//        property "sonar.login", "998d76238799d28f144d3db5d74b4c5f0fb559c2"
-//        property 'sonar.jacoco.reportPaths', 'build/jacoco/testDebug.exec'
-//    }
-//}
-
-sonarqube {
-    properties {
-        property "sonar.projectKey", "com.denisgasparoto.chucknorrisfacts"
-        property "sonar.organization", "denisgasparoto"
-        property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.login", "3f68e850ba92a5c232623417fdd6ab44db4fa27b"
-    }
-}
 
 allprojects {
     repositories {
