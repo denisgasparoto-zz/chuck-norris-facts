@@ -3,6 +3,6 @@ sonarqube {
         property "sonar.projectKey", "com.denisgasparoto.chucknorrisfacts"
         property "sonar.organization", "denisgasparoto"
         property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.login", "432f498568bf5e118e5fcf009a30b2c0c66782b1"
+        property "sonar.login", "d86ec398746864ef6af8fcf62a1635cb18931a56"
     }
 }
