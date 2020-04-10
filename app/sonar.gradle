@@ -1,11 +1,8 @@
 sonarqube {
     properties {
         property "sonar.projectKey", "com.denisgasparoto.chucknorrisfacts"
-        property("sonar.projectName", "Facts")
         property "sonar.organization", "denisgasparoto"
         property "sonar.host.url", "https://sonarcloud.io"
-        property("sonar.language", "kotlin")
-        property("sonar.username", System.getenv("SONAR_TOKEN"))
-        property "sonar.login", "d86ec398746864ef6af8fcf62a1635cb18931a56"
+        property "sonar.login", "3b402afa3766d2fc4a1213ab82eddc34e03e6fd2"
     }
 }
