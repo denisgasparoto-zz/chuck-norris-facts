@@ -36,15 +36,25 @@ jobs:
         run: bash ./gradlew test --stacktrace
 
   sonar-cloud:
-    name: Runs SonarCloud Scan
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Running SonarCloud Scan
-        run: bash ./gradlew jacocoUnitTestReport sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }} --stacktrace
+        uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Link to SonarCloud Report
-        run: echo "https://sonarcloud.io/dashboard?id=com.denisgasparoto.chucknorrisfacts"
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+#  sonar-cloud:
+#    name: Runs SonarCloud Scan
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: Running SonarCloud Scan
+#        run: bash ./gradlew jacocoUnitTestReport sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }} --stacktrace
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Link to SonarCloud Report
+#        run: echo "https://sonarcloud.io/dashboard?id=com.denisgasparoto.chucknorrisfacts"
 
