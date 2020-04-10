@@ -16,8 +16,8 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -45,10 +45,8 @@ android {
     }
 
     testOptions {
-        unitTests {
-            returnDefaultValues = true
-            includeAndroidResources = true
-        }
+        unitTests.returnDefaultValues = true
+        unitTests.includeAndroidResources = true
     }
 }
 
