@@ -3,8 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.gitlab.arturbosch.detekt'
+apply plugin: 'org.sonarqube'
 apply from: 'detekt.gradle'
 apply from: 'jacoco.gradle'
+apply from: 'sonar.gradle'
 
 android {
     compileSdkVersion 29
