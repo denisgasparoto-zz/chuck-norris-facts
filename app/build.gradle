@@ -96,13 +96,13 @@ dependencies {
     implementation 'com.jakewharton.rxbinding3:rxbinding-core:3.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.2.0'
 
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
     // Koin
     implementation 'org.koin:koin-android:2.0.1'
     implementation 'org.koin:koin-androidx-scope:2.0.1'
     implementation 'org.koin:koin-androidx-viewmodel:2.0.1'
-
-    // Timber
-    implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // Mockk
     testImplementation 'io.mockk:mockk:1.9.3'
