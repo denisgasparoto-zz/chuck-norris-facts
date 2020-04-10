@@ -1,18 +1,15 @@
 sonarqube {
-    def sonarCoverageExclusions = testCoverageExclusions.join(",")
-    def sonarFileExclusions = fileExclusions.join(",")
-
     properties {
-        property "sonar.projectKey", "com.denisgasparoto.chucknorrisfacts"
-        property "sonar.organization", "denisgasparoto"
-        property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.login", "3b402afa3766d2fc4a1213ab82eddc34e03e6fd2"
+        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.login", "3b402afa3766d2fc4a1213ab82eddc34e03e6fd2")
+        property("sonar.organization", "denisgasparoto")
 
-        property("sonar.exclusions", sonarFileExclusions)
-        property("sonar.coverage.exclusions", sonarCoverageExclusions)
+        property("sonar.projectKey", "com.denisgasparoto.chucknorrisfacts")
+        property("sonar.projectName", "chuck-norris-facts")
+        property("sonar.projectVersion", "${version}")
 
         property("sonar.kotlin.detekt.reportPaths", "$rootDir/app/build/reports/detekt/detekt.xml")
-        property("sonar.coverage.jacoco.xmlReportPaths", "$rootDir/app/build/reports/jacocoTestReport/jacocoTestReport.xml")
-
+        property("sonar.coverage.jacoco.xmlReportPaths", "$rootDir/app/build/reports/unitTestReport/unitTestReport.xml")
+        property("sonar.jacoco.reportPath", "build/jacoco/unitTestReport.exec")
     }
 }
