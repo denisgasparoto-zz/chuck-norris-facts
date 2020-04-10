@@ -47,4 +47,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Link to SonarCloud Report
         run: echo "https://sonarcloud.io/dashboard?id=com.denisgasparoto.chucknorrisfacts"
-
+        
