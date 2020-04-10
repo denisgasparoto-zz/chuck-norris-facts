@@ -35,17 +35,20 @@ jobs:
       - name: Running Unit Tests
         run: bash ./gradlew test --stacktrace
 
-  sonar-cloud:
-    name: Runs Unit Tests
-    runs-on: ubuntu-latest
+  test:
+    name: Runs all module unit tests and check test coverage
+    runs-on: ubuntu-18.04
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Running SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - uses: actions/checkout@v1
+      - name: JDK setup
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Generating Jacoco test report
+        run: bash ./gradlew jacocoTestReport
+      - name: Checking code coverage
+        run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }} -f build/reports/jacoco/jacocoTestReport.xml
 
 #  sonar-cloud:
 #    name: Runs SonarCloud Scan
