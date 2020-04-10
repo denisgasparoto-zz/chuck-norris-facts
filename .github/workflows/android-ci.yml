@@ -33,9 +33,13 @@ jobs:
         with:
           java-version: 1.8
       - name: Generating Jacoco Test Report
-        run: bash ./gradlew jacocoUnitTestReport
+        run: bash ./gradlew jacocoUnitTestReport sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }} --stacktrace
       - name: Checking Code Coverage
         run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }} -f build/reports/jacoco/jacocoUnitTestReport.xml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Link to SonarCloud Report
+        run: echo "https://sonarcloud.io/dashboard?id=com.denisgasparoto.chucknorrisfacts"
 
 #  sonar-cloud:
 #    name: Runs SonarCloud Scan
