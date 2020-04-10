@@ -32,5 +32,6 @@ jobs:
         run: bash ./gradlew jacocoUnitTestReport sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }} --stacktrace
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Link to SonarCloud Report
         run: echo "https://sonarcloud.io/dashboard?id=denisgasparoto_chuck-norris-facts"
