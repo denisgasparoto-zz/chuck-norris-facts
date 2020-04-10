@@ -38,6 +38,7 @@ jobs:
         run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }} -f build/reports/jacoco/jacocoUnitTestReport.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Link to SonarCloud Report
         run: echo "https://sonarcloud.io/dashboard?id=com.denisgasparoto.chucknorrisfacts"
 
