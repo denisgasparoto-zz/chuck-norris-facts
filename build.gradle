@@ -25,12 +25,10 @@ plugins {
 
 sonarqube {
     properties {
-        property "sonar.organization", "denisgasparoto"
         property "sonar.projectKey", "denisgasparoto_chuck-norris-facts"
+        property "sonar.organization", "denisgasparoto"
         property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.jacoco.reportPaths", "build/jacoco/testDebugUnitTest.exec"
-        property "sonar.coverage.exclusions", "**/model/**"
-        property "sonar.username", System.getenv("SONAR_TOKEN")
+        property "sonar.login", "9c23ab93da46b2460acede3f35812bda51698d01"
     }
 }
 
