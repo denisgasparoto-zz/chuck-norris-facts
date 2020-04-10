@@ -1,0 +1,17 @@
+ext {
+    projectPackage = "com.denisgasparoto.chucknorrisfacts"
+    projectName = "Facts"
+
+    fileExclusions = [
+            "build/**",
+            "**/AndroidManifest.xml",
+            "**/src/main/res/**",
+            "**/*Generated.java"
+    ]
+
+    testCoverageExclusions = [
+            'android/**/*.*',
+            '**/R.class',
+            '**/R\$*.class'
+    ]
+}
