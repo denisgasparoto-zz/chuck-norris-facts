@@ -9,7 +9,20 @@ on:
 
 jobs:
 
-  test:
+  code-analysis:
+    name: Runs Detekt
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: JDK setup
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Running Detekt
+        run: bash ./gradlew detekt
+
+  unit-tests:
     name: Unit Tests
     runs-on: ubuntu-latest
 
@@ -19,5 +32,5 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Run Unit tests
+      - name: Running Unit Tests
         run: bash ./gradlew test --stacktrace

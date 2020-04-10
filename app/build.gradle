@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.gitlab.arturbosch.detekt'
+apply from: 'detekt.gradle'
+apply from: 'jacoco.gradle'
 
 android {
     compileSdkVersion 29
