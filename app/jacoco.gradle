@@ -1,38 +1,36 @@
 apply(plugin: "jacoco")
 
-tasks.matching { it instanceof Test }.all {
-    testLogging.events = ["failed", "passed", "skipped"]
+ext {
+    coverageSourceDirs = 'src/test/java'
 }
 
-task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+jacoco {
+    toolVersion = "0.8.5"
+    reportsDir = file("$buildDir/reports")
+}
 
-    def coverageSourceDirs = [
-            "src/main/java"
-    ]
-
-    def fileFilter = [
-            '**/R.class',
-            '**/R$*.class',
-            '**/*$ViewInjector*.*',
-            '**/*$ViewBinder*.*',
-            '**/BuildConfig.*',
-            '**/Manifest*.*'
-    ]
-
-    def javaClasses = fileTree(
-            dir: "$buildDir/intermediates/classes/debug",
-            excludes: fileFilter
-    )
-
-    classDirectories.setFrom(files([javaClasses]))
-    additionalSourceDirs.setFrom(files(coverageSourceDirs))
-    sourceDirectories.setFrom(files(coverageSourceDirs))
-    executionData.setFrom(fileTree(dir: "$buildDir", includes: [
-            "jacoco/testDebugUnitTest.exec"
-    ]))
+task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports for Debug build"
 
     reports {
         xml.enabled = true
         html.enabled = true
     }
+
+    def projectPath = projectPackage.replace(".", "/")
+
+    def debugTree = fileTree(
+            dir: "$buildDir/intermediates/javac/qaDebug/classes/$projectPath/jacocotest",
+            excludes: testCoverageExclusions
+    )
+    def kotlinDebugTree = fileTree(
+            dir: "$buildDir/tmp/kotlin-classes/qaDebug",
+            excludes: testCoverageExclusions
+    )
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    classDirectories.setFrom(files([debugTree], [kotlinDebugTree]))
+    executionData.setFrom(files("$buildDir/jacoco/testDebugUnitTest.exec"))
+    sourceDirectories.setFrom(files([mainSrc]))
 }
