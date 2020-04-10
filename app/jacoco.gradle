@@ -6,9 +6,10 @@ ext {
 
 jacoco {
     toolVersion = "0.8.5"
+    reportsDir = file("$buildDir/reports")
 }
 
-task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['jacocoUnitTestReport']) {
+task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['unitTestReport']) {
     group = "Reporting"
 
     reports {
@@ -31,5 +32,5 @@ task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['jacocoUnitTestReport'
 
     sourceDirectories.setFrom(files([mainSrc]))
     classDirectories.setFrom(files([debugTree]))
-    executionData.setFrom(files("${project.buildDir}/jacoco/jacocoUnitTestReport.exec"))
+    executionData.setFrom(files("${project.buildDir}/jacoco/unitTestReport.exec"))
 }
