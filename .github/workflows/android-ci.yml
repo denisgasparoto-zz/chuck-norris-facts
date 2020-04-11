@@ -35,6 +35,19 @@ jobs:
       - name: Running Unit Tests
         run: bash ./gradlew test --stacktrace
 
+  jacoco-analysis:
+    name: Runs Jacoco
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: JDK setup
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Running Jacoco
+        run: bash ./gradlew jacocoUnitTestReport
+
   sonar-cloud:
     name: Runs SonarCloud Scan
     runs-on: ubuntu-latest
@@ -42,7 +55,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Running SonarCloud Scan
-        run: bash ./gradlew jacocoUnitTestReport sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }} --stacktrace
+        run: bash ./gradlew sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }} --stacktrace
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Link to SonarCloud Report
