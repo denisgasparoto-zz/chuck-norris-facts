@@ -10,6 +10,7 @@ plugins {
 
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply(from: "project-config.gradle")
 apply(from: "jacoco.gradle")
 apply(from: "detekt.gradle")
 apply(from: "sonar.gradle")
