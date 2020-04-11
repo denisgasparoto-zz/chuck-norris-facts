@@ -8,10 +8,6 @@ sonarqube {
         property("sonar.projectName", "chuck-norris-facts")
         property("sonar.projectVersion", "${version}")
 
-        property("sonar.coverage.jacoco.xmlReportPaths", "build/outputs/jacocoUnitTestReport.xml")
-        property("sonar.android.lint.report", "build/outputs/lint-results.xml")
-        property("sonar.java.binaries", "build/intermediates/classes/debug")
-        property("sonar.kotlin.detekt.reportPaths", "build/outputs/detekt.xml")
-        property("sonar.jacoco.reportPath", "build/outputs/testDebugUnitTest.exec")
+        property 'sonar.jacoco.reportPaths', 'build/jacoco/testDebugUnitTest.exec'
     }
 }

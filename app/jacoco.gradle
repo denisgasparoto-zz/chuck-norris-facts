@@ -1,26 +1,38 @@
 apply(plugin: "jacoco")
 
+tasks.matching { it instanceof Test }.all {
+    testLogging.events = ["failed", "passed", "skipped"]
+}
+
 task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
-    group = "Reporting"
+
+    def coverageSourceDirs = [
+            "src/main/java"
+    ]
+
+    def fileFilter = [
+            '**/R.class',
+            '**/R$*.class',
+            '**/*$ViewInjector*.*',
+            '**/*$ViewBinder*.*',
+            '**/BuildConfig.*',
+            '**/Manifest*.*'
+    ]
+
+    def javaClasses = fileTree(
+            dir: "$buildDir/intermediates/classes/debug",
+            excludes: fileFilter
+    )
+
+    classDirectories.setFrom(files([javaClasses]))
+    additionalSourceDirs.setFrom(files(coverageSourceDirs))
+    sourceDirectories.setFrom(files(coverageSourceDirs))
+    executionData.setFrom(fileTree(dir: "$buildDir", includes: [
+            "jacoco/testDebugUnitTest.exec"
+    ]))
 
     reports {
         xml.enabled = true
         html.enabled = true
     }
-
-    def fileFilter = ['**/R.class',
-                      '**/R$*.class',
-                      '**/BuildConfig.*',
-                      '**/*$ViewInjector*.*',
-                      '**/*$ViewBinder*.*',
-                      '**/*$MembersInjector*.*',
-                      '**/Manifest*.*',
-                      '**/*Test*.*',
-                      'android/**/*.*']
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
-    def mainSrc = "${project.projectDir}/src/main/java"
-
-    sourceDirectories.setFrom(files([mainSrc]))
-    classDirectories.setFrom(files([debugTree]))
-    executionData.setFrom(files("${project.buildDir}/outputs/testDebugUnitTest.exec"))
 }
