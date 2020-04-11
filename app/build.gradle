@@ -27,6 +27,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -34,12 +35,14 @@ android {
         def apiUrl = "https://api.chucknorris.io/jokes/"
 
         release {
+            testCoverageEnabled true
             resValue("string", apiUrlResName, apiUrl)
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         debug {
+            testCoverageEnabled true
             resValue("string", apiUrlResName, apiUrl)
         }
     }
@@ -55,7 +58,11 @@ android {
 
     testOptions {
         unitTests.returnDefaultValues = true
-        unitTests.includeAndroidResources = true
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
     }
 }
 
