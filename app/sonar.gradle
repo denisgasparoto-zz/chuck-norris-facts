@@ -8,6 +8,6 @@ sonarqube {
         property("sonar.projectName", "chuck-norris-facts")
         property("sonar.projectVersion", "${version}")
 
-        property 'sonar.jacoco.reportPaths', 'build/jacoco/testDebugUnitTest.exec'
+        property("sonar.jacoco.reportPaths', 'build/jacoco/testDebugUnitTest.exec")
     }
 }
