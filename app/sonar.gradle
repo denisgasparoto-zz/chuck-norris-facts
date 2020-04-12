@@ -8,7 +8,7 @@ sonarqube {
         property("sonar.projectName", "chuck-norris-facts")
         property("sonar.projectVersion", "${version}")
 
-        property("sonar.coverage.jacoco.xmlReportPaths", "../chuck-norris-facts/app/build/reports/jacocoUnitTestReport/jacocoUnitTestReport.xml")
-        property("sonar.kotlin.detekt.reportPaths", "../chuck-norris-facts/app/build/reports/detekt/detekt.xml")
+        property("sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/jacocoUnitTestReport/jacocoUnitTestReport.xml")
+        property("sonar.kotlin.detekt.reportPaths", "${project.buildDir}/reports/detekt/detekt.xml")
     }
 }
