@@ -7,12 +7,8 @@ sonarqube {
         property("sonar.projectKey", "com.denisgasparoto.chucknorrisfacts")
         property("sonar.projectName", "chuck-norris-facts")
         property("sonar.projectVersion", "${version}")
-
-        property("sonar.java.coveragePlugin", "jacoco")
-
-//        property "sonar.coverage.jacoco.xmlReportPaths", "./build/reports/jacoco/jacocoUnitTestReport/jacocoUnitTestReport.xml"
-
-      property("sonar.coverage.jacoco.xmlReportPaths", "$rootDir/app/build/reports/jacoco/jacocoUnitTestReport/jacocoUnitTestReport.xml")
+        
+        property("sonar.coverage.jacoco.xmlReportPaths", "$rootDir/app/build/reports/jacoco/jacocoUnitTestReport/jacocoUnitTestReport.xml")
         property("sonar.kotlin.detekt.reportPaths", "$rootDir/app/build/reports/detekt/detekt.xml")
     }
 }

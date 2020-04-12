@@ -20,7 +20,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Running Detekt
-        run: bash ./gradlew detekt
+        run: bash ./gradlew detekt --stacktrace
 
   unit-tests:
     name: Runs Unit Tests
@@ -46,7 +46,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Running Jacoco
-        run: bash ./gradlew jacocoUnitTestReport
+        run: bash ./gradlew jacocoUnitTestReport --stacktrace
 
   sonar-cloud:
     name: Runs SonarCloud Scan
