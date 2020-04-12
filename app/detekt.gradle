@@ -1,0 +1,5 @@
+detekt {
+    toolVersion = "1.7.4"
+    input = files("src/main/java")
+    config = files("$rootDir/app/detekt.yml")
+}

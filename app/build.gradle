@@ -1,7 +1,18 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+plugins {
+    id("com.android.application")
+    id("kotlin-android")
+    id("kotlin-android-extensions")
+    id("kotlin-kapt")
+    id("io.gitlab.arturbosch.detekt") version "1.7.4"
+    id("org.sonarqube") version "2.8"
+    id("jacoco")
+}
+
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
+apply(from: "jacoco.gradle")
+apply(from: "detekt.gradle")
+apply(from: "sonar.gradle")
 
 android {
     compileSdkVersion 29
@@ -13,8 +24,9 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -22,12 +34,14 @@ android {
         def apiUrl = "https://api.chucknorris.io/jokes/"
 
         release {
+            testCoverageEnabled true
             resValue("string", apiUrlResName, apiUrl)
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         debug {
+            testCoverageEnabled true
             resValue("string", apiUrlResName, apiUrl)
         }
     }
@@ -42,8 +56,10 @@ android {
     }
 
     testOptions {
+        execution 'ANDROID_TEST_ORCHESTRATOR'
+        animationsDisabled true
+
         unitTests {
-            returnDefaultValues = true
             includeAndroidResources = true
         }
     }
@@ -87,13 +103,13 @@ dependencies {
     implementation 'com.jakewharton.rxbinding3:rxbinding-core:3.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.2.0'
 
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
     // Koin
     implementation 'org.koin:koin-android:2.0.1'
     implementation 'org.koin:koin-androidx-scope:2.0.1'
     implementation 'org.koin:koin-androidx-viewmodel:2.0.1'
-
-    // Timber
-    implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // Mockk
     testImplementation 'io.mockk:mockk:1.9.3'

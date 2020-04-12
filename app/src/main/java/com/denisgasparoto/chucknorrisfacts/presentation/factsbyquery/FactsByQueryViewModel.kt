@@ -50,7 +50,11 @@ class FactsByQueryViewModel(
                                     updatedAt = it.updatedAt,
                                     url = it.url,
                                     fact = it.fact,
-                                    factLength = if (it.fact.length >= FACT_LENGTH_TEXT_SIZE_MANAGER) R.dimen.text_normal else R.dimen.text_huge
+                                    factLength = if (it.fact.length >= FACT_LENGTH_TEXT_SIZE_MANAGER) {
+                                        R.dimen.text_normal
+                                    } else {
+                                        R.dimen.text_huge
+                                    }
                                 )
                             }
                         )
