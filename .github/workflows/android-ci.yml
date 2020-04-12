@@ -40,7 +40,7 @@ jobs:
         run: bash ./gradlew test --stacktrace
 
   jacoco-report:
-    name: Runs Jacoco
+    name: Runs Jacoco Report
     runs-on: ubuntu-latest
 
     steps:
@@ -51,8 +51,8 @@ jobs:
           java-version: 1.8
       - name: Make gradlew executable
         run: chmod +x ./gradlew
-      - name: Running Jacoco
-        run: bash ./gradlew jacocoUnitTestReport --stacktrace
+      - name: Running Jacoco Report
+        run: bash ./gradlew clean build jacocoUnitTestReport --stacktrace
 
   sonar-cloud:
     name: Runs SonarCloud Scan
