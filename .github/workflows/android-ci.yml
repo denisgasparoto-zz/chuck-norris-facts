@@ -39,7 +39,7 @@ jobs:
       - name: Running Unit Tests
         run: bash ./gradlew test --stacktrace
 
-  jacoco-analysis:
+  jacoco-report:
     name: Runs Jacoco
     runs-on: ubuntu-latest
 
