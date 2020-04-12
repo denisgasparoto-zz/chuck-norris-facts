@@ -5,10 +5,6 @@ jacoco {
     reportsDir = file("$buildDir/reports")
 }
 
-tasks.withType(Test) {
-    jacoco.includeNoLocationClasses = true
-}
-
 task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
 
     reports {
@@ -17,28 +13,21 @@ task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) 
     }
 
     def fileFilter = [
+            'build/**',
+            '**/AndroidManifest*.*',
+            '**/src/main/res/**',
+            '**/*Generated.java',
             '**/R.class',
             '**/R$*.class',
             '**/BuildConfig.*',
-            '**/AndroidManifest*.*',
-            'android/**/*.*',
-            "build/**",
-            "**/src/main/res/**",
-            "**/*Generated.java"
+            'android/**/*.*'
     ]
 
     def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
-    def kotlinDebugTree = fileTree(
-            dir: "$buildDir/tmp/kotlin-classes/debug",
-            excludes: testCoverageExclusions
-    )
+    def kotlinDebugTree = fileTree(dir: "$buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
     def mainSrc = "${project.projectDir}/src/main/java"
 
     classDirectories.setFrom(files([debugTree], [kotlinDebugTree]))
     executionData.setFrom(files("$buildDir/jacoco/testDebugUnitTest.exec"))
     sourceDirectories.setFrom(files([mainSrc]))
-
-//    executionData.setFrom(fileTree(dir: "$buildDir", includes: [
-//            "jacoco/testDebugUnitTest.exec"
-//    ]))
 }
