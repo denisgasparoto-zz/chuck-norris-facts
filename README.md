@@ -1,2 +1,2 @@
 # chuck-norris-facts
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e5471a38aec84015870fa5eeb252b05b)](https://app.codacy.com/manual/denisgasparoto/chuck-norris-facts?utm_source=github.com&utm_medium=referral&utm_content=denisgasparoto/chuck-norris-facts&utm_campaign=Badge_Grade_Dashboard)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.denisgasparoto.chucknorrisfacts&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.denisgasparoto.chucknorrisfacts)
