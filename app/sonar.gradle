@@ -12,4 +12,3 @@ sonarqube {
         property("sonar.kotlin.detekt.reportPaths", "$rootDir/app/build/reports/detekt/detekt.xml")
     }
 }
-jacocoUnitTestReport
