@@ -55,9 +55,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Running SonarCloud Scan
-        run: bash ./gradlew sonarqube
-        -Dsonar.host.url="https://sonarcloud.io"
-        -Dsonar.login=${{ secrets.SONAR_TOKEN }} --stacktrace
+        run: bash ./gradlew sonarqube -Dsonar.host.url="https://sonarcloud.io" -Dsonar.login=${{ secrets.SONAR_TOKEN }} --stacktrace
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Link to SonarCloud Report
