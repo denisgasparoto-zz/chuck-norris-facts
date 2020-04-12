@@ -10,9 +10,6 @@ tasks.withType(Test) {
 }
 
 task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
-    group = "reporting"
-    description = "Generate unified Jacoco code coverage report"
-
     reports {
         xml.enabled = true
         html.enabled = true
