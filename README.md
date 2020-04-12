@@ -2,21 +2,30 @@
 
 # Facts
 
-Android app written in Kotlin.
+Android app written in Kotlin, integrated with [chucknorris.io](https://api.chucknorris.io/)
 
 ## Continuous Integration
 
-Runs Detekt
+Run Detekt
 ```
 ./gradlew detekt
 ```
 
-Runs Unit Tests
+Run Unit Tests
 ```
 ./gradlew test
 ```
 
-Runs Jacoco
+Run Jacoco Reports
 ```
 ./gradlew clean build jacocoUnitTestReport
 ```
+
+## Tech Specs
+- Kotlin
+- Retrofit | HTTP Requests
+- RxJava | Reactive Programming
+- Koin | Dependency Injection
+- MockK | mocking library for Kotlin
+
+
