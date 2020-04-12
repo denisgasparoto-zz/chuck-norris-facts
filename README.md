@@ -4,21 +4,16 @@
 
 Android app written in Kotlin, integrated with [chucknorris.io](https://api.chucknorris.io/)
 
+## Architecture Decisions
+- **View** - updates UI, observes changes to ViewModel
+- **ViewModel** - communicates with Router and Interactor
+- **Router** - put the navigation logic in one place
+- **Interactor** - useCases aggregator
+- **UseCase** - connect to APIs
+
 ## Continuous Integration
-
-Run Detekt
 ```
-./gradlew detekt
-```
-
-Run Unit Tests
-```
-./gradlew test
-```
-
-Run Jacoco Reports
-```
-./gradlew clean build jacocoUnitTestReport
+./gradlew build jacocoUnitTestReport sonarqube
 ```
 
 ## Tech Specs
