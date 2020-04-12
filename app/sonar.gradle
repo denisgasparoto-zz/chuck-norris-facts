@@ -1,29 +1,14 @@
 sonarqube {
     properties {
-//        property("sonar.host.url", "https://sonarcloud.io")
-//        property("sonar.login", "3b402afa3766d2fc4a1213ab82eddc34e03e6fd2")
-//        property("sonar.organization", "denisgasparoto")
-//
-//        property("sonar.projectKey", "com.denisgasparoto.chucknorrisfacts")
-//        property("sonar.projectName", "chuck-norris-facts")
-//        property("sonar.projectVersion", "${version}")
-//
-//        property("sonar.coverage.jacoco.xmlReportPaths", "$rootDir/app/build/reports/jacoco/jacocoUnitTestReport/jacocoUnitTestReport.xml")
-//        property("sonar.kotlin.detekt.reportPaths", "$rootDir/app/build/reports/detekt/detekt.xml")
+        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.login", "3b402afa3766d2fc4a1213ab82eddc34e03e6fd2")
+        property("sonar.organization", "denisgasparoto")
 
-        property("sonar.projectName", "chuck-norris-facts")
         property("sonar.projectKey", "com.denisgasparoto.chucknorrisfacts")
-        property "sonar.tests", ["src/test/java", "src/test/kotlin"]
-        property "sonar.java.coveragePlugin", "jacoco"
-        property "sonar.jacoco.reportPath", "**/jacoco/*.exec"
-        property "sonar.test.inclusions", "**/*Test*/**"
-        property "sonar.sourceEncoding", "UTF-8"
-        property "sonar.sources", "src/main/java"
-        property "sonar.exclusions", '**/*Test*/**,' +
-                '*.json,' +
-                '**/*test*/**,' +
-                '**/.gradle/**,' +
-                '**/R.class,' +
-                '**/R$*.class'
+        property("sonar.projectName", "chuck-norris-facts")
+        property("sonar.projectVersion", "${version}")
+
+        property("sonar.coverage.jacoco.xmlReportPaths", "$rootDir/app/build/reports/jacoco/jacocoUnitTestReport/jacocoUnitTestReport.xml")
+        property("sonar.kotlin.detekt.reportPaths", "$rootDir/app/build/reports/detekt/detekt.xml")
     }
 }
