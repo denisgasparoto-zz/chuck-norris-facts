@@ -5,7 +5,14 @@ jacoco {
     reportsDir = file("$buildDir/reports")
 }
 
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
 task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+    group = "reporting"
+    description = "Generate unified Jacoco code coverage report"
 
     reports {
         xml.enabled = true
@@ -23,11 +30,11 @@ task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) 
             'android/**/*.*'
     ]
 
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def javaDebugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
     def kotlinDebugTree = fileTree(dir: "$buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
     def mainSrc = "${project.projectDir}/src/main/java"
 
-    classDirectories.setFrom(files([debugTree], [kotlinDebugTree]))
+    classDirectories.setFrom(files([javaDebugTree], [kotlinDebugTree]))
     executionData.setFrom(files("$buildDir/jacoco/testDebugUnitTest.exec"))
     sourceDirectories.setFrom(files([mainSrc]))
 }
