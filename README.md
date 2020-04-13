@@ -4,7 +4,7 @@
 
 Android app written in **Kotlin**, integrated with [chucknorris.io](https://api.chucknorris.io/)
 
-## Architecture Decisions
+## Architecture
 - **View** - updates UI, observes changes to ViewModel
 - **ViewModel** - communicates with Router and Interactor
 - **Router** - put the navigation logic in one place
@@ -17,7 +17,6 @@ Android app written in **Kotlin**, integrated with [chucknorris.io](https://api.
 ```
 
 ## Tech Specs
-- **Kotlin**
 - **Retrofit** - HTTP Requests
 - **RxJava** - Reactive Programming
 - **Koin** - Dependency Injection
