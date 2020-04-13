@@ -16,27 +16,28 @@ task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) 
     }
 
     def fileFilter = [
+            'build/**',
+            'android/**/*.*',
+            '**/*Test*.*',
             '**/R.class',
             '**/R$*.class',
-            '**/BuildConfig.*',
             '**/Manifest*.*',
-            '**/*Test*.*',
+            '**/BuildConfig.*',
+            '**/*Application*.*',
             '**/*Generated.java',
-            'build/**',
             '**/src/main/res/**',
             '**/AndroidManifest.xml',
-            'android/**/*.*',
-            '**/*Adapter*',
-            '**/*ViewHolder*',
+
             '**/*Router*',
-            '**/*Contract*',
+            '**/*Adapter*',
             '**/*Activity*',
-            '**/*Application*.*',
-            '**/core/base/*',
+            '**/*Contract*',
+            '**/*ViewHolder*',
             '**/core/di/*',
-            '**/core/extensions/*',
+            '**/core/base/*',
             '**/core/network/*',
-            '**/domain/model/*'
+            '**/domain/model/*',
+            '**/core/extensions/*'
     ]
 
     def mainSrc = "${project.projectDir}/src/main/java"
