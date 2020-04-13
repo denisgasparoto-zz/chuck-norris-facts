@@ -17,18 +17,22 @@ task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) 
 
     def fileFilter = [
             'build/**',
-            '**/AndroidManifest*.*',
+            '**/AndroidManifest.xml',
             '**/src/main/res/**',
             '**/*Generated.java',
             '**/R.class',
             '**/R$*.class',
             '**/BuildConfig.*',
             'android/**/*.*',
-            '**/*Adapter*.*',
-            '**/*ViewHolder*.*',
-            '**/*Module*.*',
-            '**/*Activity*.*',
+            '**/*Adapter*',
+            '**/*ViewHolder*',
+            '**/*Router*',
+            '**/*Contract*',
+            '**/*Module*.**',
+            '**/*Activity*',
             '**/*Application*.*',
+            '**/core/**',
+            '**/domain/model/**',
             '**/SchedulerProvider**.*'
     ]
 
