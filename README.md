@@ -2,7 +2,7 @@
 
 # Facts
 
-Android app written in Kotlin, integrated with [chucknorris.io](https://api.chucknorris.io/)
+Android app written in **Kotlin**, integrated with [chucknorris.io](https://api.chucknorris.io/)
 
 ## Architecture Decisions
 - **View** - updates UI, observes changes to ViewModel
@@ -17,10 +17,10 @@ Android app written in Kotlin, integrated with [chucknorris.io](https://api.chuc
 ```
 
 ## Tech Specs
-- Kotlin
-- Retrofit | HTTP Requests
-- RxJava | Reactive Programming
-- Koin | Dependency Injection
-- MockK | mocking library for Kotlin
+- **Kotlin**
+- **Retrofit** - HTTP Requests
+- **RxJava** - Reactive Programming
+- **Koin** - Dependency Injection
+- **MockK** - mocking library for Kotlin
 
 
