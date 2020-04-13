@@ -23,7 +23,13 @@ task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) 
             '**/R.class',
             '**/R$*.class',
             '**/BuildConfig.*',
-            'android/**/*.*'
+            'android/**/*.*',
+            '**/*Adapter*.*',
+            '**/*ViewHolder*.*',
+            '**/*Module*.*',
+            '**/*Activity*.*',
+            '**/*Application*.*',
+            '**/SchedulerProvider**.*'
     ]
 
     def javaDebugTree = fileTree(dir: "$buildDir/intermediates/classes/debug", excludes: fileFilter)
