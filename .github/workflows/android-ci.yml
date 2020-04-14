@@ -55,6 +55,8 @@ jobs:
         run: bash ./gradlew clean build jacocoUnitTestReport sonarqube
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Link to SonarCloud Report
+        run: echo "https://sonarcloud.io/dashboard?id=com.denisgasparoto.chucknorrisfacts"
 
 #  sonar-cloud:
 #    name: Runs SonarCloud Scan
