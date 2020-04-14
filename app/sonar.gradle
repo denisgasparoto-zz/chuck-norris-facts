@@ -11,6 +11,7 @@ sonarqube {
         property("sonar.coverage.exclusions", [
                 "**/core/**/*",
                 "**/model/**/*",
+                "**/*Activity.*",
                 '**/*Adapter.*',
                 '**/*Interactor.*',
                 '**/*BaseApplication.*'

@@ -9,46 +9,6 @@ tasks.withType(Test) {
     jacoco.excludes = ['jdk.internal.*']
 }
 
-//task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
-//    reports {
-//        xml.enabled = true
-//        html.enabled = true
-//    }
-//
-//    def fileFilter = [
-//            'build/**',
-//            'android/**/*.*',
-//            '**/*Test*.*',
-//            '**/R.class',
-//            '**/R$*.class',
-//            '**/Manifest*.*',
-//            '**/BuildConfig.*',
-//            '**/*Application*.*',
-//            '**/*Generated.java',
-//            '**/src/main/res/**',
-//            '**/AndroidManifest.xml',
-//
-//            '**/*Router*',
-//            '**/*Adapter*',
-//            '**/*Activity*',
-//            '**/*Contract*',
-//            '**/*ViewHolder*',
-//            '**/core/di/*',
-//            '**/core/base/*',
-//            '**/core/network/*',
-//            '**/domain/model/*',
-//            '**/core/extensions/*'
-//    ]
-//
-//    def mainSrc = "${project.projectDir}/src/main/java"
-//    def javaDebugTree = fileTree(dir: "$buildDir/intermediates/classes/debug", excludes: fileFilter)
-//    def kotlinDebugTree = fileTree(dir: "$buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
-//
-//    classDirectories.setFrom(files([javaDebugTree], [kotlinDebugTree]))
-//    executionData.setFrom(files("$buildDir/jacoco/testDebugUnitTest.exec"))
-//    sourceDirectories.setFrom(files([mainSrc]))
-//}
-
 task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
 
     def excludes = [
@@ -67,6 +27,7 @@ task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) 
             'androidx/**/*.*',
             '**/core/**',
             '**/model**',
+            '**/*Activity.*',
             '**/*Adapter.*',
             '**/*Interactor.*',
             '**/*BaseApplication.*'
