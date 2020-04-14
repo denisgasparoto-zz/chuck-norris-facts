@@ -8,6 +8,15 @@ sonarqube {
         property("sonar.projectName", "chuck-norris-facts")
         property("sonar.projectVersion", "${version}")
 
+        property("sonar.coverage.exclusions", [
+                "**/core/**/*",
+                "**/model/**/*",
+                "**/*Activity.*",
+                '**/*Adapter.*',
+                '**/*Interactor.*',
+                '**/*BaseApplication.*'
+        ])
+
         property("sonar.coverage.jacoco.xmlReportPaths", "${project.projectDir}/build/reports/jacoco/jacocoUnitTestReport/jacocoUnitTestReport.xml")
         property("sonar.kotlin.detekt.reportPaths", "${project.projectDir}/build/reports/detekt/detekt.xml")
     }
