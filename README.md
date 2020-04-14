@@ -8,12 +8,12 @@ Android app written in **Kotlin**, integrated with [chucknorris.io](https://api.
 - **View** - updates UI, observes changes to ViewModel
 - **ViewModel** - communicates with Router and Interactor
 - **Router** - put the navigation logic in one place
-- **Interactor** - useCases aggregator
+- **Interactor** - UseCases aggregator
 - **UseCase** - connect to APIs
 
 ## Continuous Integration
 ```
-./gradlew build jacocoUnitTestReport sonarqube
+./gradlew clean build jacocoUnitTestReport sonarqube
 ```
 
 ## Tech Specs
