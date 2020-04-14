@@ -53,19 +53,21 @@ jobs:
         run: chmod +x ./gradlew
       - name: Running Jacoco Report
         run: bash ./gradlew clean build jacocoUnitTestReport sonarqube
-
-  sonar-cloud:
-    name: Runs SonarCloud Scan
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v1
-      - name: Running SonarCloud Scan
-        run: bash ./gradlew sonarqube -Dsonar.host.url="https://sonarcloud.io" -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-      - name: Link to SonarCloud Report
-        run: echo "https://sonarcloud.io/dashboard?id=com.denisgasparoto.chucknorrisfacts"
+
+#  sonar-cloud:
+#    name: Runs SonarCloud Scan
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: Running SonarCloud Scan
+#        run: bash ./gradlew sonarqube -Dsonar.host.url="https://sonarcloud.io" -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#      - name: Make gradlew executable
+#        run: chmod +x ./gradlew
+#      - name: Link to SonarCloud Report
+#        run: echo "https://sonarcloud.io/dashboard?id=com.denisgasparoto.chucknorrisfacts"
