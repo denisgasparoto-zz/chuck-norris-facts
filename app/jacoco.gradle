@@ -67,7 +67,6 @@ task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) 
             'androidx/**/*.*',
             '**/core/**',
             '**/model**',
-            '**/*Activity.*',
             '**/*Adapter.*',
             '**/*Interactor.*',
             '**/*BaseApplication.*'
