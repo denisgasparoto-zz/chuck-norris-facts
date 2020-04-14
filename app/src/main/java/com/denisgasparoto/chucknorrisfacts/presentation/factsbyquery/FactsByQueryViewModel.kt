@@ -43,18 +43,16 @@ class FactsByQueryViewModel(
                                 FactsQueryResultDisplay(
                                     categories = if (it.categories.isNullOrEmpty()) listOf(
                                         UNCATEGORIZED_LABEL
-                                    ) else it.categories,
+                                    )
+                                    else it.categories,
                                     createdAt = it.createdAt,
                                     iconUrl = it.iconUrl,
                                     id = it.id,
                                     updatedAt = it.updatedAt,
                                     url = it.url,
                                     fact = it.fact,
-                                    factLength = if (it.fact.length >= FACT_LENGTH_TEXT_SIZE_MANAGER) {
-                                        R.dimen.text_normal
-                                    } else {
-                                        R.dimen.text_huge
-                                    }
+                                    factLength = if (it.fact.length >= FACT_LENGTH_TEXT_SIZE_MANAGER) R.dimen.text_normal
+                                    else R.dimen.text_huge
                                 )
                             }
                         )
