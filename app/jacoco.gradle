@@ -10,27 +10,44 @@ tasks.withType(Test) {
 }
 
 task jacocoUnitTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+
+    def excludes = [
+            'build/**',
+            '**/*Application*.*',
+            '**/*Generated.java',
+            '**/src/main/res/**',
+            'src/main/assets/**/*.*',
+            '**/R.class',
+            '**/R$*.class',
+            '**/*$ViewInjector*.*',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/*Test*.*',
+            'android/**/*.*',
+            'androidx/**/*.*',
+            '**/core/**',
+            '**/model**',
+            '**/*Activity.*',
+            '**/*Adapter.*',
+            '**/*Interactor.*',
+            '**/*BaseApplication.*'
+    ]
+
+    classDirectories.setFrom(fileTree(
+            dir: "${project.buildDir}/intermediates/classes/debug",
+            excludes: excludes
+    ) + fileTree(
+            dir: "${project.buildDir}/tmp/kotlin-classes/debug",
+            excludes: excludes
+    ))
+
+    def coverageSourceDirs = ["src/main/java"]
+    additionalSourceDirs.setFrom(files(coverageSourceDirs))
+    sourceDirectories.setFrom(files(coverageSourceDirs))
+    executionData.setFrom(files("${project.buildDir}/jacoco/testDebugUnitTest.exec"))
+
     reports {
         xml.enabled = true
         html.enabled = true
     }
-
-    def fileFilter = [
-            'build/**',
-            '**/AndroidManifest*.*',
-            '**/src/main/res/**',
-            '**/*Generated.java',
-            '**/R.class',
-            '**/R$*.class',
-            '**/BuildConfig.*',
-            'android/**/*.*'
-    ]
-
-    def javaDebugTree = fileTree(dir: "$buildDir/intermediates/classes/debug", excludes: fileFilter)
-    def kotlinDebugTree = fileTree(dir: "$buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
-    def mainSrc = "${project.projectDir}/src/main/java"
-
-    classDirectories.setFrom(files([javaDebugTree], [kotlinDebugTree]))
-    executionData.setFrom(files("$buildDir/jacoco/testDebugUnitTest.exec"))
-    sourceDirectories.setFrom(files([mainSrc]))
 }
