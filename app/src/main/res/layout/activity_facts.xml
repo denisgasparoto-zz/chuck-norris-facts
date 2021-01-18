@@ -39,7 +39,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_medium"
-            android:background="?attr/selectableItemBackground"
             android:padding="@dimen/spacing_large"
             android:text="@string/facts_activity_mb_start"
             android:textColor="@color/colorBlack"
