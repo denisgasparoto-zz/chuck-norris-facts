@@ -38,9 +38,8 @@ abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseViewHolder<T>>() {
         return getViewHolder(inflate(getLayoutResId(viewType), parent), viewType)
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (items.isEmpty()) VIEW_TYPE_EMPTY else VIEW_TYPE_FILLED
-    }
+    override fun getItemViewType(position: Int) =
+        if (items.isEmpty()) VIEW_TYPE_EMPTY else VIEW_TYPE_FILLED
 
     override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) {
         if (holder is EmptyListViewHolder) return else holder.bind(items[position])

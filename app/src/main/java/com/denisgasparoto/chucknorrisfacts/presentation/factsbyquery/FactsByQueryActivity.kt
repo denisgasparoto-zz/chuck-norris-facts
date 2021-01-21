@@ -3,19 +3,16 @@ package com.denisgasparoto.chucknorrisfacts.presentation.factsbyquery
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denisgasparoto.chucknorrisfacts.R
 import com.denisgasparoto.chucknorrisfacts.core.base.BaseActivity
 import com.denisgasparoto.chucknorrisfacts.core.base.BaseAdapter
+import com.denisgasparoto.chucknorrisfacts.core.base.observeResource
+import com.denisgasparoto.chucknorrisfacts.core.base.viewBinding
 import com.denisgasparoto.chucknorrisfacts.core.extensions.closeKeyboard
 import com.denisgasparoto.chucknorrisfacts.core.extensions.isVisible
 import com.denisgasparoto.chucknorrisfacts.core.extensions.showSnackBar
-import kotlinx.android.synthetic.main.activity_facts_by_query.activity_facts_by_query_et_search
-import kotlinx.android.synthetic.main.activity_facts_by_query.activity_facts_by_query_ll_container
-import kotlinx.android.synthetic.main.activity_facts_by_query.activity_facts_by_query_pb_loading
-import kotlinx.android.synthetic.main.activity_facts_by_query.activity_facts_by_query_rv_items
-import kotlinx.android.synthetic.main.activity_facts_by_query.activity_facts_by_query_toolbar
+import com.denisgasparoto.chucknorrisfacts.databinding.ActivityFactsByQueryBinding
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -31,15 +28,16 @@ class FactsByQueryActivity : BaseActivity() {
         parametersOf(this)
     }
     private val factsByQueryAdapter: FactsByQueryAdapter by inject()
+    private val binding by viewBinding(ActivityFactsByQueryBinding::inflate)
 
     override fun initialize() {
-        setSupportActionBar(activity_facts_by_query_toolbar)
+        setSupportActionBar(binding.activityFactsByQueryToolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowTitleEnabled(false)
         }
 
-        activity_facts_by_query_rv_items.apply {
+        binding.activityFactsByQueryRvItems.apply {
             layoutManager = LinearLayoutManager(
                 this@FactsByQueryActivity,
                 LinearLayoutManager.VERTICAL,
@@ -55,11 +53,11 @@ class FactsByQueryActivity : BaseActivity() {
             }
         }
 
-        activity_facts_by_query_et_search.let {
+        binding.activityFactsByQueryEtSearch.let {
             it.requestFocus()
             it.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == IME_ACTION_SEARCH) {
-                    viewModel.fetchFactsByQuery(it.text.toString())
+                    viewModel.validateSearchQuery(it.text.toString())
                     return@setOnEditorActionListener true
                 }
                 return@setOnEditorActionListener false
@@ -85,31 +83,17 @@ class FactsByQueryActivity : BaseActivity() {
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        activity_facts_by_query_ll_container.closeKeyboard()
+        binding.activityFactsByQueryLlContainer.closeKeyboard()
         currentFocus?.clearFocus()
         return super.dispatchTouchEvent(ev)
     }
 
     private fun bindFactsByQueryViewModelOutputs() {
-        viewModel.apply {
-            fillFactsByQuery().observe(
-                this@FactsByQueryActivity,
-                Observer(factsByQueryAdapter::setList)
-            )
-
-            isLoading().observe(
-                this@FactsByQueryActivity,
-                Observer { activity_facts_by_query_pb_loading.isVisible(it) })
-
-            showError().observe(
-                this@FactsByQueryActivity,
-                Observer { activity_facts_by_query_ll_container.showSnackBar(it) })
-
-            showInvalidSearchError().observe(this@FactsByQueryActivity, Observer {
-                activity_facts_by_query_ll_container.showSnackBar(
-                    getString(R.string.invalid_search_message_error)
-                )
-            })
-        }
+        viewModel.factsQueryResultDisplay.observeResource(this,
+            onSuccess = factsByQueryAdapter::setList,
+            onError = { binding.activityFactsByQueryLlContainer.showSnackBar(it) },
+            onLocalError = { binding.activityFactsByQueryLlContainer.showSnackBar(getString(R.string.invalid_search_message_error)) },
+            onLoading = { binding.activityFactsByQueryPbLoading.isVisible(it) }
+        )
     }
 }

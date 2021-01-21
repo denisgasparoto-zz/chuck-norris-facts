@@ -27,7 +27,6 @@ internal val networkModule = module {
     }
 }
 
-
 private fun buildRetrofitClient(url: String) = Retrofit.Builder()
     .baseUrl(url)
     .client(buildHttpClient())

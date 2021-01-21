@@ -1,6 +1,7 @@
 package com.denisgasparoto.chucknorrisfacts.presentation.factsbyquery
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.denisgasparoto.chucknorrisfacts.core.base.Resource
 import com.denisgasparoto.chucknorrisfacts.domain.model.display.FactsQueryResultDisplay
 import com.denisgasparoto.chucknorrisfacts.domain.usecase.FetchFactsByQueryUseCase
 import com.denisgasparoto.chucknorrisfacts.domain.usecase.GetErrorMessageUseCase
@@ -12,17 +13,13 @@ interface FactsByQueryContract {
 
     interface ViewModel {
 
-        fun fetchFactsByQuery(query: String)
+        val factsQueryResultDisplay: MutableLiveData<Resource<List<FactsQueryResultDisplay>>>
 
-        fun fillFactsByQuery(): LiveData<List<FactsQueryResultDisplay>>
+        fun validateSearchQuery(query: String)
+
+//        fun fetchFactsByQuery(query: String)
 
         fun shareFact(url: String)
-
-        fun isLoading(): LiveData<Boolean>
-
-        fun showError(): LiveData<String>
-
-        fun showInvalidSearchError(): LiveData<Int>
     }
 
     interface Interactor : FetchFactsByQueryUseCase, GetErrorMessageUseCase

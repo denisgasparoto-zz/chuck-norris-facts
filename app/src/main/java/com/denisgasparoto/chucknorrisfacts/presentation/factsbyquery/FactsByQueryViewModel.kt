@@ -3,6 +3,7 @@ package com.denisgasparoto.chucknorrisfacts.presentation.factsbyquery
 import androidx.lifecycle.MutableLiveData
 import com.denisgasparoto.chucknorrisfacts.R
 import com.denisgasparoto.chucknorrisfacts.core.base.BaseViewModel
+import com.denisgasparoto.chucknorrisfacts.core.base.Resource
 import com.denisgasparoto.chucknorrisfacts.core.base.SchedulerProvider
 import com.denisgasparoto.chucknorrisfacts.domain.model.display.FactsQueryResultDisplay
 import io.reactivex.disposables.CompositeDisposable
@@ -18,27 +19,26 @@ class FactsByQueryViewModel(
     private val schedulerProvider: SchedulerProvider
 ) : BaseViewModel(), FactsByQueryContract.ViewModel {
 
-    private val factsByQuery = MutableLiveData<List<FactsQueryResultDisplay>>()
-    private var isLoading = MutableLiveData<Boolean>()
-    private val error = MutableLiveData<String>()
-    private val invalidSearchError = MutableLiveData<Int>()
+    override val factsQueryResultDisplay =
+        MutableLiveData<Resource<List<FactsQueryResultDisplay>>>()
 
-    override fun fetchFactsByQuery(query: String) {
+    override fun validateSearchQuery(query: String) {
         if (query.isEmpty() || query.length < MINIMUM_QUERY_LENGTH) {
-            invalidSearchError.postValue(R.string.invalid_search_message_error)
+            factsQueryResultDisplay.error(R.string.invalid_search_message_error)
             Timber.d(TIMBER_INVALID_SEARCH_MESSAGE)
-            return
-        }
+        } else fetchFactsByQuery(query)
+    }
 
+    private fun fetchFactsByQuery(query: String) {
         compositeDisposable.add(
             interactor.fetchFactsByQuery(query)
                 .subscribeOn(schedulerProvider.io)
                 .observeOn(schedulerProvider.ui)
-                .doOnSubscribe { isLoading.value = true }
-                .doAfterTerminate { isLoading.value = false }
+                .doOnSubscribe { factsQueryResultDisplay.loading(true) }
+                .doAfterTerminate { factsQueryResultDisplay.loading(false) }
                 .subscribe(
                     { response ->
-                        factsByQuery.postValue(
+                        factsQueryResultDisplay.success(
                             response.facts.map {
                                 FactsQueryResultDisplay(
                                     categories = if (it.categories.isNullOrEmpty()) listOf(
@@ -59,22 +59,14 @@ class FactsByQueryViewModel(
                         )
                         Timber.d(TIMBER_RESPONSE_SUCCESS_MESSAGE)
                     }, {
-                        error.postValue(interactor.getErrorMessage(it))
+                        factsQueryResultDisplay.error(interactor.getErrorMessage(it))
                         Timber.d(TIMBER_RESPONSE_ERROR_MESSAGE)
                     }
                 )
         )
     }
 
-    override fun fillFactsByQuery() = factsByQuery
-
     override fun shareFact(url: String) = router.routeToShareFact(url)
-
-    override fun isLoading() = isLoading
-
-    override fun showError() = error
-
-    override fun showInvalidSearchError() = invalidSearchError
 
     private companion object {
         private const val UNCATEGORIZED_LABEL = "UNCATEGORIZED"
